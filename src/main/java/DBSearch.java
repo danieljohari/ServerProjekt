@@ -8,6 +8,7 @@ public class DBSearch {
     public static String mail;
     public static String password;
     public static String X;
+    public static String mailTilKlient;
 
 
 
@@ -39,20 +40,23 @@ public class DBSearch {
             Statement statement = connection.createStatement();
 
             for (ResultSet rs = statement.executeQuery(sql);
-                 rs.next();
-                 passwordsql = rs.getString("Password")) {
-                System.out.println("mail: " + rs.getString("Mail") + "\npassword:" + rs.getString("Password") + "\n");
+                 rs.next();) {
                 mailsql = rs.getString("Mail");
+                passwordsql = rs.getString("Password");
+                System.out.println("SQL MAIL: " + mailsql + " = KLIENT MAIL : " + mail + '\n'
+                        + "SQL PASSWORD: "  + passwordsql + " = KLIENT PASSWORD :" + password + '\n');
+
             }
 
 
             if (mail.equals(mailsql) && password.equals(passwordsql)) {
-                System.out.println("jeg er blevet dum i hovedet");
+                System.out.println("Det indtastede og  Databasen matcher!" + '\n' + "Videresender til Klient");
                 X = "Velkommen til:";
+                mailTilKlient = mail;
                 ServerProjekt.sendFromServer(X);
 
-
             }
+
             connection.close();
 
         } catch (Exception throwables) {

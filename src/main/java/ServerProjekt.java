@@ -1,3 +1,5 @@
+import sun.security.pkcs11.Secmod;
+
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -48,7 +50,8 @@ public class ServerProjekt {
         String[] pass1;
         pass1 = clientResponse[1].split("=");
         passTilDb = pass1[1];
-        System.out.println("FRA KLIENT:" + clientSentence);
+        System.out.println("FRA KLIENT:" + clientSentence + '\n');
+        System.out.println("Starter konverting af input" + '\n');
         //  System.out.println("FRA SERVER: " + serverSentence);
 
 
@@ -65,7 +68,7 @@ public class ServerProjekt {
         DataOutputStream outToClient = new DataOutputStream(connectionSocket.getOutputStream());
         outToServer = DBSearch.X ;
         //outToClient.writeBytes(outToServer);
-        outToClient.writeBytes(outToServer + '\n');
+        outToClient.writeBytes(outToServer  + " " + DBSearch.mailTilKlient+ '\n');
 
         //outToClient.writeChars(outToServer);
 
